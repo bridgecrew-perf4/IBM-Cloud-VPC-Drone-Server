@@ -1,0 +1,1 @@
+variable drone_address {}

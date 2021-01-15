@@ -1,0 +1,4 @@
+---
+  - import_playbook: basics.yml
+  - import_playbook: docker.yml
+  - import_playbook: drone.yml

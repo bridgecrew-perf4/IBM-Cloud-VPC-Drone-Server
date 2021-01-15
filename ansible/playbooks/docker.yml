@@ -1,0 +1,21 @@
+---
+  - hosts: instance
+    become: true
+    tasks:
+      - name: Add apt-key
+        apt_key:
+          url: https://download.docker.com/linux/ubuntu/gpg
+          state: present
+      - name: Add docker repo 
+        apt_repository:
+          repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename }} stable"
+      - name: Install docker 
+        apt:
+          name: docker-ce
+          state: present
+          update_cache: yes
+      - name: Add ryan user to docker group
+        user:
+          name: ryan
+          append: true
+          groups: docker

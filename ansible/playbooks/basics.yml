@@ -1,0 +1,19 @@
+---
+  - hosts: instance
+    gather_facts: yes
+    become: true
+    tasks:
+      - name: Update apt package cache
+        apt: upgrade=yes update_cache=yes
+        when: ansible_facts['os_family'] == "Debian"
+      - name: Install required packages for Drone and Docker
+        apt:
+          pkg:
+            - apt-transport-https
+            - ca-certificates
+            - software-properties-common
+            - build-essential
+            - unzip
+            - jq
+            - git
+          state: present
